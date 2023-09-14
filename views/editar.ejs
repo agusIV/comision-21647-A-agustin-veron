@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+</head>
+<body>
+
+    <a type="button" class="btn btn-primary" href="/">
+        volver
+    </a>
+
+    <div class="card">
+        <div class="card-header">
+            Editar publicacion
+        </div>
+        <div class="card-body">
+            <form method="POST">
+                <div class="mb-3">
+                    <label for="Titulo" class="form-label">Titulo</label>
+                    <input type="text" class="form-control" id="Titulo" name="Titulo" value="<%= publicacion.titulo %>">
+                </div>
+                <div class="mb-3">
+                    <label for="Descripcion" class="form-label">Descripcion</label>
+                    <input type="text" class="form-control" id="Descripcion" name="Descripcion" value="<%= publicacion.descripcion %>">
+                </div>
+                <div class="mb-3">
+                    <label for="Imagen" class="form-label">Link de imagen</label>
+                    <input type="text" class="form-control" id="Imagen" name="Imagen" value="<%= publicacion.imagen %>">
+                </div>
+                <button type="submit" class="btn btn-info">
+                    actualizar
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+</body>
+</html>
