@@ -13,7 +13,7 @@ const publicaciones = sequelize.define('publicaciones', {   //se guarda en una c
         type: DataTypes.STRING
     },
     fecha: {
-        type: DataTypes.STRING
+        type: DataTypes.DATE
     }
 }, {
     timestamps: false,   //timestamp cada vez que se crea o modifica un registro lo almacena

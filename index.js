@@ -1,5 +1,7 @@
 require("dotenv").config()  //llama la biblioteca dotenv para usarla
 
+const helmet = require("helmet");   
+
 const { db_test } = require("./database.js")    //importa el testeo de la db
 const publicModel = require("./publicModel.js") //importa la db
 
@@ -10,6 +12,16 @@ const PUERTO = process.env.PUERTO   //process.env.variable usa las variables de 
 
 app.set("view engine", "ejs");  //le indica al servidor que va a usar ejs como motor de plantilla
 
+//app.use(helmet())   //extra de seguridad
+app.use(helmet({ crossOriginEmbedderPolicy: false, originAgentCluster: true }));
+app.use(
+  helmet.contentSecurityPolicy({
+    useDefaults: true,
+    directives: {
+      "img-src": ["'self'", "https: data: blob:"],
+    },
+  })
+);
 app.use(express.json())                         //le avisa al servidor que lea en formato json cuando se ejecute una peticion post mediante body
 app.use(express.urlencoded({ extends: true }))  //le avisa al servidor que le van a llegar parametros por input
 
@@ -33,7 +45,6 @@ app.post("/agregar", async function (req, res){
             titulo: Titulo, 
             descripcion: Descripcion, 
             imagen: Imagen, 
-            fecha: new Date()
         })
 
         if (nuevaPublicacion) { //si nuevaPublicacion no es null
@@ -57,6 +68,7 @@ app.get("/editar/:id", async function (req, res){   //le llega el parametro id q
         })
 
         if (publicacion) {
+            console.log("editar", publicacion);
             res.render("editar", {publicacion: publicacion})
         }else{
             res.send("no se pudo encontrar publicacion")
@@ -70,12 +82,13 @@ app.get("/editar/:id", async function (req, res){   //le llega el parametro id q
 app.post("/editar/:id", async function (req, res){
     const {id} = req.params
     const { Titulo, Descripcion, Imagen } = req.body
+    console.log(id);
 
     try{
         const actualizarPublicacion = await publicModel.update({
-            Titulo: Titulo,
-            Descripcion: Descripcion,
-            Imagen: Imagen
+            titulo: Titulo,
+            descripcion: Descripcion,
+            imagen: Imagen
         }, {
             where: {
                 id: id
@@ -83,6 +96,7 @@ app.post("/editar/:id", async function (req, res){
         })
 
         if (actualizarPublicacion) {
+            console.log("editado", actualizarPublicacion);
             res.redirect("/")
         }else{
             res.send("no se pudo actualizar publicacion")
