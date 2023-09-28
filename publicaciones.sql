@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 14-09-2023 a las 17:54:18
+-- Tiempo de generación: 28-09-2023 a las 05:28:29
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -29,11 +29,18 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `publicaciones` (
   `id` int(11) NOT NULL,
-  `titulo` varchar(100) NOT NULL,
+  `titulo` varchar(250) NOT NULL,
   `descripcion` varchar(500) NOT NULL,
-  `imagen` varchar(250) NOT NULL,
-  `fecha` datetime(6) NOT NULL
+  `imagen` varchar(500) NOT NULL,
+  `fecha` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `publicaciones`
+--
+
+INSERT INTO `publicaciones` (`id`, `titulo`, `descripcion`, `imagen`, `fecha`) VALUES
+(5, 'one piece', 'el mejor anime', 'https://pics.filmaffinity.com/One_Piece_Serie_de_TV-647985949-large.jpg', '2023-09-28 01:44:39');
 
 --
 -- Índices para tablas volcadas
@@ -53,7 +60,7 @@ ALTER TABLE `publicaciones`
 -- AUTO_INCREMENT de la tabla `publicaciones`
 --
 ALTER TABLE `publicaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
